@@ -1,0 +1,19 @@
+services:
+  - type: worker
+    name: telegram-business-autobot
+    runtime: docker
+    plan: 0.5c-512mb
+    region: frankfurt
+    disk:
+      name: autobot-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: DB_PATH
+        value: /var/data/autobot.sqlite3
+      - key: TIMEZONE
+        value: Europe/Kyiv
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-20b
